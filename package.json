@@ -1,0 +1,28 @@
+{
+  "name": "brave-pink-hero-green",
+  "version": "1.0.0",
+  "description": "Full-stack Brave Pink / Hero Green duotone photo editor (frontend + backend)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "keywords": [
+    "duotone",
+    "image-editor",
+    "brave-pink",
+    "hero-green",
+    "resistance-blue"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "jimp": "^0.22.12",
+    "multer": "^1.4.5-lts.1"
+  }
+}
