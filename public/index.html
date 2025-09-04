@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brave Pink · Hero Green — Duotone Maker</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F784C5'/%3E%3Ccircle cx='24' cy='24' r='14' fill='%231B602F'/%3E%3C/svg%3E">
+  <meta name="description" content="Make Brave Pink / Hero Green duotone photos instantly—private, fast, free."/>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="brand">
+        <span class="dot dot--pink"></span>
+        <span class="dot dot--green"></span>
+        <span class="brand__text">BravePink · HeroGreen</span>
+      </div>
+
+      <nav class="nav__links nav__links--desktop">
+        <a href="#editor">Editor</a>
+        <a href="#howto">How it works</a>
+        <a href="https://github.com/dxhys/brave-pink-hero-green/" target="_blank" rel="noopener">Source</a>
+        <a href="https://www.instagram.com/dxhys.19_/" target="_blank" rel="noopener" class="ig-link" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="ig-icon" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="ig-logo-gradient-nav" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f09433"/>
+                <stop offset="25%" stop-color="#e6683c"/>
+                <stop offset="50%" stop-color="#dc2743"/>
+                <stop offset="75%" stop-color="#cc2366"/>
+                <stop offset="100%" stop-color="#bc1888"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-logo-gradient-nav)"/>
+            <rect x="7" y="7" width="10" height="10" rx="3" ry="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="16.2" cy="7.8" r="1.2" fill="currentColor"/>
+          </svg>
+          <span class="ig-text">Instagram</span>
+        </a>
+      </nav>
+
+      <div class="nav__actions">
+        <button id="themeToggle" class="btn icon theme-toggle" aria-label="Toggle dark/light mode">
+          <span class="theme-toggle__icon"></span>
+        </button>
+        <button id="navToggle" class="btn icon nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="nav__hamburger"></span>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobileMenu" class="nav__mobile" hidden>
+      <a href="#editor" class="nav__mobile-link">Editor</a>
+      <a href="#howto" class="nav__mobile-link">How it works</a>
+      <a href="https://github.com/dxhys/brave-pink-hero-green/" target="_blank" rel="noopener" class="nav__mobile-link">Source</a>
+      <a href="https://www.instagram.com/dxhys.19_/" target="_blank" rel="noopener" class="nav__mobile-link">Instagram</a>
+    </nav>
+  </header>
+
+  <main id="editor" class="wrap">
+    <section class="hero">
+      <h1>Turn any photo into <span class="accent">Brave Pink</span> & <span class="accent2">Hero Green</span>.</h1>
+      <p class="hero__sub">Fast, private, and free.</p>
+    </section>
+
+    <section class="card grid">
+      <div class="left">
+        <div class="dropzone" id="dropzone">
+          <input id="fileInput" class="dropzone__input" type="file" accept="image/*">
+          <div class="dropzone__content">
+            <div class="dropzone__icon">⬆</div>
+            <div class="dropzone__text">
+              <strong>Drag & drop</strong> your photo here or <span class="linklike">browse</span>.
+            </div>
+            <div class="dropzone__hint">PNG · JPG · WEBP · up to 25 MB</div>
+          </div>
+        </div>
+
+        <div class="canvasWrap">
+          <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="actions actions--primary">
+          <button id="downloadPng">Download PNG</button>
+          <button id="downloadJpeg">Download JPEG</button>
+          <button id="downloadWebp">Download WebP</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="presets">
+          <div class="chips">
+            <button data-shadow="#1B602F" data-highlight="#F784C5" class="chip active">HeroGreen + BravePink</button>
+            <button data-shadow="#000000" data-highlight="#F784C5" class="chip">BravePink Mono</button>
+            <button data-shadow="#0A1B6E" data-highlight="#F784C5" class="chip">Resistance Blue + Pink</button>
+          </div>
+          <div class="row duo">
+            <div class="duo__item">
+              <label>Shadow</label>
+              <div class="inputColor">
+                <input type="color" id="shadowColor" value="#1B602F"/>
+                <input type="text" id="shadowHex" value="#1B602F"/>
+              </div>
+            </div>
+            <div class="duo__item">
+              <label>Highlight</label>
+              <div class="inputColor">
+                <input type="color" id="highlightColor" value="#F784C5"/>
+                <input type="text" id="highlightHex" value="#F784C5"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sliders">
+          <div class="row">
+            <label>Intensity</label>
+            <input type="range" id="intensity" min="0" max="1" step="0.01" value="1"/>
+            <span id="intensityVal">1.00</span>
+          </div>
+          <div class="row">
+            <label>Brightness</label>
+            <input type="range" id="brightness" min="-1" max="1" step="0.01" value="0"/>
+            <span id="brightnessVal">0</span>
+          </div>
+          <div class="row">
+            <label>Contrast</label>
+            <input type="range" id="contrast" min="-1" max="1" step="0.01" value="0"/>
+            <span id="contrastVal">0</span>
+          </div>
+          <div class="row">
+            <label>Saturation</label>
+            <input type="range" id="saturation" min="-1" max="1" step="0.01" value="0"/>
+            <span id="saturationVal">0</span>
+          </div>
+        </div>
+
+        <div class="tips" id="howto">
+          <h3>How it works</h3>
+          <ul>
+            <li>Upload your photo (nothing is uploaded to our servers).</li>
+            <li>Pick a preset or choose custom HEX colors.</li>
+            <li>Tweak intensity & basic corrections, then download.</li>
+          </ul>
+          <button id="loadSample" class="ghost">Try with a sample image</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <span>Made with ♥ — client-side by default. </span>
+      <span class="sep">•</span>
+      <a href="/privacy.html">Privasi</a>
+      <span class="sep">•</span>
+      <a href="https://www.instagram.com/dxhys.19_/" target="_blank" rel="noopener" class="ig-link" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="ig-icon" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="ig-logo-gradient-footer" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f09433"/>
+              <stop offset="25%" stop-color="#e6683c"/>
+              <stop offset="50%" stop-color="#dc2743"/>
+              <stop offset="75%" stop-color="#cc2366"/>
+              <stop offset="100%" stop-color="#bc1888"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-logo-gradient-footer)"/>
+          <rect x="7" y="7" width="10" height="10" rx="3" ry="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="16.2" cy="7.8" r="1.2" fill="currentColor"/>
+        </svg>
+        <span class="ig-text">Instagram</span>
+      </a>
+      <span class="sep">•</span>
+      <a href="/health" target="_blank" rel="noopener">Server status</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
